@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class and Style Bindings</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+        .not{
+            width: 500px;
+            height: 100px;
+            border: 1px solid black;
+            
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Binding HTML classes -->
+    <div class="not">
+        v-bind is used with class and style. In addition to strings, the expressions can also evaluate to objects or arrays.
+    </div>
+    
+    <div id="app" v-bind:class="classObject"></div>
+    <div id="app2" v-bind:class="[{ active: isActive }, errorClass]"></div>
+    <!-- Binding Inline Styles -->
+    <div id ="app3" v-bind:style="styleObject">crime scene</div>
+
+
+
+    <script>
+    // HTML 
+        var app = new Vue({
+            el : "#app",
+            data : {
+                isActive: true,
+                error : true
+            },
+            computed : {
+                classObject: function(){
+                    return {
+                        active : this.isActive && this.error,
+                        "text-danger" : this.error && this.error.type === "fatal"
+                    }
+                }
+            }
+        })
+        var app2 = new Vue({
+            el : "#app2",
+            data : {
+                isActive : true,
+                errorClass : "text-danger"
+            }
+        })
+        // CSS
+
+        var app3 = new Vue({
+            el : "#app3",
+            data : {
+                styleObject:{
+
+                    color : "red",
+                    fontSize : "13px"
+
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

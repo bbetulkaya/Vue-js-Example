@@ -1,0 +1,142 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<!-- ilk vue app -->
+    <div id="app">
+        {{ message }}
+    </div>
+    <hr>
+<!-- vue app 2 | v-bind  -->
+    <div id="app2">
+        <span v-bind:title="message">
+          Hover your mouse over me for a few seconds
+          to see my dynamically bound title!
+        </span>
+      </div>
+      <hr>
+<!-- bir öğenin varlığını değiştirme | v-if -->
+      <div id="app3">
+        <span v-if="seen"> Now you see me</span>
+      </div>
+      <hr>
+<!-- Liste gösterme | v-for  -->
+      <div id="app4">
+          <ol>
+              <li v-for = "todo in todos">
+                  {{todo.text}}
+              </li>
+          </ol>
+      </div>
+      <hr>
+      <!-- User inputları ile başa çıkma | v-on -->
+      <div id="app5">
+          <p>{{message}}</p>
+          <button v-on:click = "reverseMessage">Reverse Message</button>
+      </div>
+      <hr>
+      <!-- Kullanıcı girdisi ile değişen modeller | v-model  -->
+      <div id="app6">
+          <p>{{message}}</p>
+          <input v-model="message">
+      </div>
+      <hr>
+      <!-- COMPONENT YAPIMI | v-bind -->
+      <div id="app7">
+          <ol>
+    <!--
+      Now we provide each todo-item with the todo object
+      it's representing, so that its content can be dynamic.
+      We also need to provide each component with a "key",
+      which will be explained later.
+    -->
+              <todo-item 
+              v-for = "item in groceryList"
+              v-bind:todo = "item"
+              v-bind:key = "item.id" 
+              ></todo-item>
+          </ol>
+      </div>
+
+    <script>
+        // ekrana hello world! yazan ilk app
+        var app = new Vue({
+            el : "#app",
+            data : {
+                message : "I Love You 3000"
+            }
+        });
+        // değişkeni değiştirmek için yazılan kod parçası
+        app.message="hahahha i lied!"
+
+        var app2 = new Vue({
+            el : "#app2",
+            data : {
+                message : 'You loaded this page on ' + new Date().toLocaleString()
+            }
+        });
+
+        var app3 = new Vue({
+            el : "#app3",
+            data : {
+                seen : true
+            }
+        });
+
+        var app4 = new Vue({
+            el : "#app4",
+            data : {
+                todos : [
+                    { text : "Learn Vue"},
+                    { text : "Learn Django"},
+                    { text : "Build something awesome!"}
+                ]
+            }
+        });
+        // insert new element console code
+        // app4.todos.push({ text: 'New item' })
+
+        var app5 = new Vue({
+            el : "#app5",
+            data : {
+                message : "TONYSTARK"
+            },
+            methods : {
+                reverseMessage : function(){
+                    this.message = this.message.split("").reverse().join("")
+                }
+            }
+        });
+
+        var app6 = new Vue({
+            el : "#app6",
+            data : {
+                message : "Merhaba Vue!"
+            }
+        });
+
+        // COMPONENT TANIMLAMA!
+
+        Vue.component("todo-item",{
+            props : ["todo"],
+            template : "<li>{{ todo.text }}</li>"
+        });
+
+        var app7 = new Vue({
+            el : "#app7",
+            data : {
+                groceryList : [
+                    { id : 0 , text : "Tom Holland"},
+                    { id : 1 , text : "James McAvoy"},
+                    { id : 2 ,  text : "Martin Freeman"}
+                ]
+            }
+        });
+
+        </script>
+</body>
+</html>

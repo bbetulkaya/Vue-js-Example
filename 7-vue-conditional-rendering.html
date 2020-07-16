@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1  v-if="awesome">Vue is awesome!</h1>
+        <h1  v-else>Oh no 😢</h1>
+    </div>
+
+    <div id="app2">
+        <h1 v-if="Math.random()>0.5">True</h1>
+            <h1 v-else>False</h1>
+    </div>
+
+<div id="app3">      
+    <template v-if="loginType === 'username'">
+    <label>Username</label>
+    <input placeholder="Enter your username" key="username-input">
+  </template>
+  <template v-else>
+    <label>Email</label>
+    <input placeholder="Enter your email address" key="email-input">
+  </template>
+
+</div>
+<div id="app3">
+    <button {{toggleLoginType()}}>Toggle login type</button>
+ </div>
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data : {
+                awesome : false
+            }
+        })
+        var app2 = new Vue({
+            el : "#app2",
+            data : {
+                awesome : false
+            }
+        })
+        new Vue({
+            el: '#app3',
+            data: {
+                loginType: 'username'
+            },
+             methods: {
+                toggleLoginType: function () {
+            return this.loginType = this.loginType === 'username' ? 'email' : 'username'
+            }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Rendering | v-for</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <ul id="example1">
+        <li v-for="item in items" :key="item.message">
+            {{item.message}}
+        </li>
+    </ul>
+    <hr>
+
+    <ul id="example2">
+        <li v-for="(item, index) in items">
+          {{ parentMessage }} - {{ index }} - {{ item.message }}
+        </li>
+      </ul>
+      <hr>
+
+      <ul id="v-for-object" class="demo">
+          <li v-for = "(value,name) in object">
+              {{name}} : {{value}}
+          </li>
+      </ul>
+      <hr>
+
+      <ul id="example4">
+          <li v-for="n in evenNumbers">
+              {{n}}
+            </li>
+      </ul>
+      <hr>
+
+    <div id="example5">
+    <ul  v-for="set in sets">
+        <li v-for="n in even(set)">{{ n }}</li>
+      </ul>
+    </div>
+      
+    <script>
+        var example1 = new Vue({
+            el : "#example1",
+            data : {
+                items:[
+                {message : "Foo"},
+                {message :"Bar"}
+                ]
+                
+            }
+        })
+
+        var example2 = new Vue({
+            el : "#example2",
+            data : {
+                parentMessage : "Parent",
+                items:[
+                {message : "Foo"},
+                {message :"Bar"}
+                ]
+            }
+        })
+
+        var example3 = new Vue({
+            el: "#v-for-object",
+            data : {
+                object:{
+                    title : "Captain americanın 10 kötü özelliği",
+                    author : "Tony Stark",
+                    publishedAt:"2016-04-10"
+                }
+            }
+        })
+        
+        var example4 = new Vue({
+            el : "#example4",
+            data : {
+                numbers: [1,2,3,4,5,6,7]
+            },
+            computed : {
+                evenNumbers : function(){
+                    return this.numbers.filter(function(number){
+                        return number%2 === 0
+                    })
+                }
+            }
+        })
+
+        var example5 = new Vue({
+            el : "#example5",
+            data : {
+                sets : [[1,2,3,4,5],[6,7,8,9,10]]
+            },
+            methods : {
+                even : function(numbers){
+                    return numbers.filter(function(number){
+                        return number%2 === 0
+                    })
+                }
+            }
+
+        })
+
+    </script>
+</body>
+</html>

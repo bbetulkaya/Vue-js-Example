@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Syntax</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <!-- #TEXT -->
+        <span>Message : {{ msg }}</span>
+        <hr>
+        <!-- Eğer v-once directive'i kullanılırsa msg objesi asla değişmez -->
+        <span v-once>This will never change: {{ msg }}</span>
+        <hr>
+        <!-- #HTML YAZMA |v-html -->
+        <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+        <hr>
+        <!--  -->
+
+    </div>
+
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data :{
+                msg : "Hello Vue!",
+                rawHtml : "<p style='color:red'>I Love You 3000</p>"
+            }
+
+        })
+    </script>
+</body>
+</html>
