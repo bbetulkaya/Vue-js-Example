@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Bindings</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="message" placeholder="edit me">
+        <p> Message is : {{ message }}</p>
+        <span>Multiline message is:</span>
+        <p style="white-space: pre-line;"> {{ message1 }}</p>
+        <br>
+        <textarea v-model="message1" placeholder="add multiple lines" cols="30" rows="10"></textarea>
+        <br>
+        <input type="checkbox" v-model="checked" id="checkbox">
+        <label for="checkbox"> {{checked}}</label>
+        <br>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+        <br>
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+        <br>
+        <select v-model="selected">
+            <option disable value="">Please select one</option>
+            <option>Infinity War</option>
+            <option>Back to the future</option>
+            <option>Star Wars</option>
+        </select>
+        <span>Selected : {{ selected }}</span>
+        <br>
+        <select v-model="selected2">
+            <option disable value="">Please select a fictional character</option>
+            <option v-for="option in options" v-bind:value="option.value">
+                {{option.text}}
+            </option>
+        </select>
+        <span>Selected : {{ selected2}}</span>
+        <br>
+        
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                message: "",
+                message1: "",
+                checked: false,
+                checkedNames: [],
+                picked: "",
+                selected: "",
+                selected2: "",
+                options: [
+                    { text: "Tony Stark", value: "A" },
+                    { text: "Sherlock Holmes", value: "B" },
+                    { text: "John Watson", value: "C" }
+                ]
+
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>
